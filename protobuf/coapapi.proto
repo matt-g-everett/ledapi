@@ -1,8 +1,8 @@
-package ledapi;
 syntax = "proto3";
+package ledapi;
 
 message Frame {
-    optional bytes frame_data = 1;
+    bytes frame_data = 1;
 }
 
 message Config {
@@ -11,8 +11,8 @@ message Config {
         FIXED_FRAME = 1;
         SWISH_RAINBOW = 2;
     }
-    optional Mode mode = 1;
-    optional Frame fixed_frame = 2;
+    Mode mode = 1;
+    Frame fixed_frame = 2;
 }
 
 message FrameSet {
