@@ -2,17 +2,55 @@ syntax = "proto3";
 package ledapi;
 
 message Frame {
-    bytes frame_data = 1;
+    bytes data = 1;
+}
+
+message ClassicConfig {
+    uint32 num_highlights = 1;
+    uint32 background_rgb = 2;
+    uint32 highlight_rgb = 3;
+    uint32 star_rgb = 4;
+    uint32 num_twinkles = 5;
+    uint32 twinkle_rgb = 6;
+}
+
+message ScanConfig {
+    enum ScanMode {
+        WRAP = 0;
+        SWISH = 1;
+    }
+
+    enum Direction {
+        DOWN = 0;
+        UP = 1;
+    }
+
+    ScanMode mode = 1;
+    uint32 intensity = 2;
+    uint32 trail_length = 3;
+    Direction direction = 4;
 }
 
 message Config {
     enum Mode {
         OFF = 0;
         FIXED_FRAME = 1;
-        SWISH_RAINBOW = 2;
+        PRESET = 2;
+        SCAN = 3;
+        CLASSIC = 4;
     }
+
+    enum Preset {
+        NONE = 0;
+        NIGHT = 1;
+        CLASSIC_TREE = 2;
+    }
+
     Mode mode = 1;
-    Frame fixed_frame = 2;
+    Preset preset = 2;
+    Frame frame = 3;
+    ClassicConfig classic_config = 4;
+    ScanConfig scan_config = 5;
 }
 
 message FrameSet {
